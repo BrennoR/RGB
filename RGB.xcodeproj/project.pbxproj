@@ -7,21 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B402E47B21549B5000077697 /* AdvancedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402E47A21549B5000077697 /* AdvancedVC.swift */; };
+		B41FF9BC219D347900CAF8AF /* DataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FF9BB219D347900CAF8AF /* DataVC.swift */; };
+		B41FF9BE219D445800CAF8AF /* dataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FF9BD219D445800CAF8AF /* dataCell.swift */; };
+		B41FF9C0219D44C400CAF8AF /* RGBData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FF9BF219D44C400CAF8AF /* RGBData.swift */; };
+		B428E5C1213DDA920034F07D /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B428E5C0213DDA920034F07D /* RGB.swift */; };
+		B428E5C4213E0D8E0034F07D /* RoundedShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B428E5C3213E0D8E0034F07D /* RoundedShadowView.swift */; };
+		B428E5C6213E0E010034F07D /* RoundedShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B428E5C5213E0E010034F07D /* RoundedShadowButton.swift */; };
 		B429844D213B5417003AC37C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B429844C213B5417003AC37C /* AppDelegate.swift */; };
-		B429844F213B5417003AC37C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B429844E213B5417003AC37C /* ViewController.swift */; };
+		B429844F213B5417003AC37C /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B429844E213B5417003AC37C /* CameraVC.swift */; };
 		B4298452213B5417003AC37C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4298450213B5417003AC37C /* Main.storyboard */; };
 		B4298454213B5418003AC37C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4298453213B5418003AC37C /* Assets.xcassets */; };
 		B4298457213B5418003AC37C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4298455213B5418003AC37C /* LaunchScreen.storyboard */; };
+		B49E642A218BFC620098FB64 /* CalibrationCurves.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E6429218BFC620098FB64 /* CalibrationCurves.swift */; };
+		BCAEF8F89CF81FB28F4F1389 /* Pods_RGB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159A5CD31FB594E5B8473061 /* Pods_RGB.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		159A5CD31FB594E5B8473061 /* Pods_RGB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RGB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AC5D24BA97FB713229640C7 /* Pods-RGB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RGB/Pods-RGB.debug.xcconfig"; sourceTree = "<group>"; };
+		B402E47A21549B5000077697 /* AdvancedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedVC.swift; sourceTree = "<group>"; };
+		B41FF9BB219D347900CAF8AF /* DataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataVC.swift; sourceTree = "<group>"; };
+		B41FF9BD219D445800CAF8AF /* dataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataCell.swift; sourceTree = "<group>"; };
+		B41FF9BF219D44C400CAF8AF /* RGBData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBData.swift; sourceTree = "<group>"; };
+		B428E5C0213DDA920034F07D /* RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
+		B428E5C3213E0D8E0034F07D /* RoundedShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowView.swift; sourceTree = "<group>"; };
+		B428E5C5213E0E010034F07D /* RoundedShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowButton.swift; sourceTree = "<group>"; };
 		B4298449213B5417003AC37C /* RGB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B429844C213B5417003AC37C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B429844E213B5417003AC37C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B429844E213B5417003AC37C /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
 		B4298451213B5417003AC37C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B4298453213B5418003AC37C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4298456213B5418003AC37C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4298458213B5418003AC37C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B49E6429218BFC620098FB64 /* CalibrationCurves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationCurves.swift; sourceTree = "<group>"; };
+		E5782BB240D8C6C2EB5CC3F8 /* Pods-RGB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGB.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGB/Pods-RGB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +49,71 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCAEF8F89CF81FB28F4F1389 /* Pods_RGB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B73C0BB1BDB53E1625A8978 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7AC5D24BA97FB713229640C7 /* Pods-RGB.debug.xcconfig */,
+				E5782BB240D8C6C2EB5CC3F8 /* Pods-RGB.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6A7B758750AF04A28A7510BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				159A5CD31FB594E5B8473061 /* Pods_RGB.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B411CE84219BAC3900902E5E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B41FF9BF219D44C400CAF8AF /* RGBData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B414C546215432E900FAEC34 /* Chemistry */ = {
+			isa = PBXGroup;
+			children = (
+				B49E6429218BFC620098FB64 /* CalibrationCurves.swift */,
+			);
+			path = Chemistry;
+			sourceTree = "<group>";
+		};
+		B428E5BF213DDA7B0034F07D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B428E5C0213DDA920034F07D /* RGB.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B428E5C2213E0D710034F07D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B428E5C3213E0D8E0034F07D /* RoundedShadowView.swift */,
+				B428E5C5213E0E010034F07D /* RoundedShadowButton.swift */,
+				B41FF9BD219D445800CAF8AF /* dataCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B4298440213B5417003AC37C = {
 			isa = PBXGroup;
 			children = (
 				B429844B213B5417003AC37C /* RGB */,
 				B429844A213B5417003AC37C /* Products */,
+				2B73C0BB1BDB53E1625A8978 /* Pods */,
+				6A7B758750AF04A28A7510BE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +128,28 @@
 		B429844B213B5417003AC37C /* RGB */ = {
 			isa = PBXGroup;
 			children = (
+				B414C546215432E900FAEC34 /* Chemistry */,
+				B411CE84219BAC3900902E5E /* Model */,
+				B428E5C2213E0D710034F07D /* View */,
+				B428E5BF213DDA7B0034F07D /* Extensions */,
+				B429845E213B57E3003AC37C /* Controller */,
 				B429844C213B5417003AC37C /* AppDelegate.swift */,
-				B429844E213B5417003AC37C /* ViewController.swift */,
 				B4298450213B5417003AC37C /* Main.storyboard */,
 				B4298453213B5418003AC37C /* Assets.xcassets */,
 				B4298455213B5418003AC37C /* LaunchScreen.storyboard */,
 				B4298458213B5418003AC37C /* Info.plist */,
 			);
 			path = RGB;
+			sourceTree = "<group>";
+		};
+		B429845E213B57E3003AC37C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B429844E213B5417003AC37C /* CameraVC.swift */,
+				B402E47A21549B5000077697 /* AdvancedVC.swift */,
+				B41FF9BB219D347900CAF8AF /* DataVC.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +159,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B429845B213B5418003AC37C /* Build configuration list for PBXNativeTarget "RGB" */;
 			buildPhases = (
+				70C4BBDCEB86A26139B50B1C /* [CP] Check Pods Manifest.lock */,
 				B4298445213B5417003AC37C /* Sources */,
 				B4298446213B5417003AC37C /* Frameworks */,
 				B4298447213B5417003AC37C /* Resources */,
+				F4A06AE4B7AA7D5537205558 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,12 +220,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		70C4BBDCEB86A26139B50B1C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RGB-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4A06AE4B7AA7D5537205558 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RGB/Pods-RGB-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RGB/Pods-RGB-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B4298445213B5417003AC37C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B429844F213B5417003AC37C /* ViewController.swift in Sources */,
+				B428E5C4213E0D8E0034F07D /* RoundedShadowView.swift in Sources */,
+				B428E5C6213E0E010034F07D /* RoundedShadowButton.swift in Sources */,
+				B41FF9BC219D347900CAF8AF /* DataVC.swift in Sources */,
+				B41FF9C0219D44C400CAF8AF /* RGBData.swift in Sources */,
+				B402E47B21549B5000077697 /* AdvancedVC.swift in Sources */,
+				B428E5C1213DDA920034F07D /* RGB.swift in Sources */,
+				B49E642A218BFC620098FB64 /* CalibrationCurves.swift in Sources */,
+				B41FF9BE219D445800CAF8AF /* dataCell.swift in Sources */,
+				B429844F213B5417003AC37C /* CameraVC.swift in Sources */,
 				B429844D213B5417003AC37C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +415,7 @@
 		};
 		B429845C213B5418003AC37C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AC5D24BA97FB713229640C7 /* Pods-RGB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -289,13 +427,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.brennoribeiro.RGB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		B429845D213B5418003AC37C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5782BB240D8C6C2EB5CC3F8 /* Pods-RGB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -307,7 +446,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.brennoribeiro.RGB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
