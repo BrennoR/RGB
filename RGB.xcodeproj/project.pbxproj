@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B402488A21A8CA4E000609CA /* RGB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B402488821A8CA4E000609CA /* RGB.xcdatamodeld */; };
 		B402E47B21549B5000077697 /* AdvancedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402E47A21549B5000077697 /* AdvancedVC.swift */; };
 		B41FF9BC219D347900CAF8AF /* DataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FF9BB219D347900CAF8AF /* DataVC.swift */; };
 		B41FF9BE219D445800CAF8AF /* dataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FF9BD219D445800CAF8AF /* dataCell.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		159A5CD31FB594E5B8473061 /* Pods_RGB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RGB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AC5D24BA97FB713229640C7 /* Pods-RGB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RGB/Pods-RGB.debug.xcconfig"; sourceTree = "<group>"; };
+		B402488921A8CA4E000609CA /* RGB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RGB.xcdatamodel; sourceTree = "<group>"; };
 		B402E47A21549B5000077697 /* AdvancedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedVC.swift; sourceTree = "<group>"; };
 		B41FF9BB219D347900CAF8AF /* DataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataVC.swift; sourceTree = "<group>"; };
 		B41FF9BD219D445800CAF8AF /* dataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataCell.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				B428E5BF213DDA7B0034F07D /* Extensions */,
 				B429845E213B57E3003AC37C /* Controller */,
 				B429844C213B5417003AC37C /* AppDelegate.swift */,
+				B402488821A8CA4E000609CA /* RGB.xcdatamodeld */,
 				B4298450213B5417003AC37C /* Main.storyboard */,
 				B4298453213B5418003AC37C /* Assets.xcassets */,
 				B4298455213B5418003AC37C /* LaunchScreen.storyboard */,
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B428E5C4213E0D8E0034F07D /* RoundedShadowView.swift in Sources */,
+				B402488A21A8CA4E000609CA /* RGB.xcdatamodeld in Sources */,
 				B428E5C6213E0E010034F07D /* RoundedShadowButton.swift in Sources */,
 				B41FF9BC219D347900CAF8AF /* DataVC.swift in Sources */,
 				B41FF9C0219D44C400CAF8AF /* RGBData.swift in Sources */,
@@ -473,6 +477,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B402488821A8CA4E000609CA /* RGB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B402488921A8CA4E000609CA /* RGB.xcdatamodel */,
+			);
+			currentVersion = B402488921A8CA4E000609CA /* RGB.xcdatamodel */;
+			path = RGB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B4298441213B5417003AC37C /* Project object */;
 }

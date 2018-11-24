@@ -341,6 +341,10 @@ class CameraVC: UIViewController {
         default: break
         }
     }
+    
+    func storeRGBData(date: Date, location: String, chemical: String, concentration: String) {
+        
+    }
 
 }
 
@@ -385,7 +389,6 @@ extension CameraVC: AVCapturePhotoCaptureDelegate {
             }
             
             let newImg = cropBottomImage(image: image!)
-            
             self.previewImageView.image = newImg
         }
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -18,6 +19,8 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         dataTableView.delegate = self
         dataTableView.dataSource = self
+        
+        // Storing Core Data
     }
     
     @IBAction func backBtnWasPressed(_ sender: Any) {
