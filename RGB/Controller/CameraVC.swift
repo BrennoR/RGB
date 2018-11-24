@@ -223,6 +223,7 @@ class CameraVC: UIViewController {
         default:
             break
         }
+        // Add to core data here?
     }
     
     func newMode(newMode: modeState, color: UIColor) {
