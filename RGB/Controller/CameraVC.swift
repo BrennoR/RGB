@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CoreData
 
 var RH = [Float]()
 var GH = [Float]()

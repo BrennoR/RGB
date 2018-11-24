@@ -21,6 +21,7 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         dataTableView.dataSource = self
         
         // Storing Core Data
+        
     }
     
     @IBAction func backBtnWasPressed(_ sender: Any) {
