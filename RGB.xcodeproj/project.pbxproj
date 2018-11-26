@@ -20,6 +20,7 @@
 		B4298452213B5417003AC37C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4298450213B5417003AC37C /* Main.storyboard */; };
 		B4298454213B5418003AC37C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4298453213B5418003AC37C /* Assets.xcassets */; };
 		B4298457213B5418003AC37C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4298455213B5418003AC37C /* LaunchScreen.storyboard */; };
+		B497A8C521ABC0D5008A5658 /* RGBValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B497A8C421ABC0D5008A5658 /* RGBValues.swift */; };
 		B49E642A218BFC620098FB64 /* CalibrationCurves.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E6429218BFC620098FB64 /* CalibrationCurves.swift */; };
 		BCAEF8F89CF81FB28F4F1389 /* Pods_RGB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159A5CD31FB594E5B8473061 /* Pods_RGB.framework */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		B4298453213B5418003AC37C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4298456213B5418003AC37C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4298458213B5418003AC37C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B497A8C421ABC0D5008A5658 /* RGBValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBValues.swift; sourceTree = "<group>"; };
 		B49E6429218BFC620098FB64 /* CalibrationCurves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationCurves.swift; sourceTree = "<group>"; };
 		E5782BB240D8C6C2EB5CC3F8 /* Pods-RGB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGB.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGB/Pods-RGB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				B41FF9BF219D44C400CAF8AF /* RGBData.swift */,
+				B497A8C421ABC0D5008A5658 /* RGBValues.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B428E5C4213E0D8E0034F07D /* RoundedShadowView.swift in Sources */,
+				B497A8C521ABC0D5008A5658 /* RGBValues.swift in Sources */,
 				B402488A21A8CA4E000609CA /* RGB.xcdatamodeld in Sources */,
 				B428E5C6213E0E010034F07D /* RoundedShadowButton.swift in Sources */,
 				B41FF9BC219D347900CAF8AF /* DataVC.swift in Sources */,

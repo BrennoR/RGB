@@ -70,7 +70,7 @@ extension UIImage {
         return value
     }
     
-    func getAvgPixelColorFromBox(box: UILabel) -> (red: Float, green: Float, blue: Float, rh: [Float], gh: [Float], bh: [Float], ih: [Float]) {
+    func getAvgPixelColorFromBox(box: UILabel) -> RGBValues {
         
         let pixelData = self.cgImage!.dataProvider!.data
         let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
@@ -117,7 +117,8 @@ extension UIImage {
         let avgB = B / counter
         //        print(avgB)
         
-        return (avgR, avgG, avgB, RH, GH, BH, IH)
+//        return (avgR, avgG, avgB, RH, GH, BH, IH)
+        return RGBValues(red: avgR, green: avgG, blue: avgB, rh: RH, gh: GH, bh: BH, ih: IH)
     }
     
     func makeColor(pos: CGPoint) -> UIColor {
@@ -136,7 +137,7 @@ extension UIImage {
     }
     
 
-    func getAvgPixelColorFromCircle(box: UILabel) -> (red: Float, green: Float, blue: Float, rh: [Float], gh: [Float], bh: [Float], ih: [Float]) {
+    func getAvgPixelColorFromCircle(box: UILabel) -> RGBValues {
         
         let pixelData = self.cgImage!.dataProvider!.data
         let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
@@ -190,7 +191,8 @@ extension UIImage {
         let avgB = B / counter
         //        print(avgB)
         
-        return (avgR, avgG, avgB, RH, GH, BH, IH)
+//        return (avgR, avgG, avgB, RH, GH, BH, IH)
+        return RGBValues(red: avgR, green: avgG, blue: avgB, rh: RH, gh: GH, bh: BH, ih: IH)
     }
     
     

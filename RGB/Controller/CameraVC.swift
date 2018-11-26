@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import CoreData
+import CoreLocation
 
 var RH = [Float]()
 var GH = [Float]()
@@ -26,11 +27,12 @@ enum modeState {
     case pH
 }
 
-class CameraVC: UIViewController {
+class CameraVC: UIViewController, CLLocationManagerDelegate {
     
     var captureSession: AVCaptureSession!
     var cameraOutput: AVCapturePhotoOutput!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    let locationManager = CLLocationManager()
     
     var photoData: Data?
     
@@ -104,11 +106,9 @@ class CameraVC: UIViewController {
         
         circleLayer.path = circlePath.cgPath
         
-        //change the fill color
+        // change the fill color
         circleLayer.fillColor = UIColor.clear.cgColor
-        //you can change the stroke color
         circleLayer.strokeColor = UIColor.red.cgColor
-        //you can change the line width
         circleLayer.lineWidth = 1
         
         view.layer.addSublayer(circleLayer)
@@ -116,6 +116,14 @@ class CameraVC: UIViewController {
         
         modeBtn.setTitle(" Mode: \(mode)", for: .normal)
         modeBtn.backgroundColor = #colorLiteral(red: 0.3452148438, green: 0.8467610677, blue: 1, alpha: 0.4574593322)
+        
+        // location
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,44 +194,35 @@ class CameraVC: UIViewController {
     }
     
     
-    func analyzeRGB2(box: UILabel) {
+    func analyzeRGB(box: UILabel) {
         switch shapeStatus {
         case "square":
             let RGB = captureImageView.image?.getAvgPixelColorFromBox(box: box)
-            switch mode {
-            case .Phosphate:
-                lvl = phosphateLvl(blue: RGB!.blue)
-            case .Nitrate:
-                lvl = nitrateLvl(red: RGB!.red)
-            case .pH:
-                lvl = pHLvl(green: RGB!.green)
-            }
-            rgbLbl.text = "Red: \(RGB!.red) \nGreen: \(RGB!.green) \nBlue: \(RGB!.blue) \nIntensity \(0.299*RGB!.red + 0.587*RGB!.green + 0.114*RGB!.blue)\n\(mode): \(lvl) ppm"
-            RH = (RGB?.rh)!
-            GH = (RGB?.gh)!
-            BH = (RGB?.bh)!
-            IH = (RGB?.ih)!
-            print("square")
+            RGBValuesSetup(RGB: RGB!)
         case "circle":
             let RGB = captureImageView.image?.getAvgPixelColorFromCircle(box: box)
-            switch mode {
-            case .Phosphate:
-                lvl = phosphateLvl(blue: RGB!.blue)
-            case .Nitrate:
-                lvl = nitrateLvl(red: RGB!.red)
-            case .pH:
-                lvl = pHLvl(green: RGB!.green)
-            }
-            rgbLbl.text = "Red: \(RGB!.red) \nGreen: \(RGB!.green) \nBlue: \(RGB!.blue) \nIntensity \(0.299*RGB!.red + 0.587*RGB!.green + 0.114*RGB!.blue)\n\(mode): \(lvl) ppm"
-            RH = (RGB?.rh)!
-            GH = (RGB?.gh)!
-            BH = (RGB?.bh)!
-            IH = (RGB?.ih)!
-            print("circle")
+            RGBValuesSetup(RGB: RGB!)
         default:
             break
         }
-        // Add to core data here?
+    }
+    
+    func RGBValuesSetup(RGB: RGBValues) {
+        switch mode {
+        case .Phosphate:
+            lvl = phosphateLvl(blue: RGB.blue)
+        case .Nitrate:
+            lvl = nitrateLvl(red: RGB.red)
+        case .pH:
+            lvl = pHLvl(green: RGB.green)
+        }
+        rgbLbl.text = "Red: \(RGB.red) \nGreen: \(RGB.green) \nBlue: \(RGB.blue) \nIntensity \(0.299*RGB.red + 0.587*RGB.green + 0.114*RGB.blue)\n\(mode): \(lvl) ppm"
+        RH = (RGB.rh)
+        GH = (RGB.gh)
+        BH = (RGB.bh)
+        IH = (RGB.ih)
+        let locValue:CLLocationCoordinate2D = self.locationManager.location!.coordinate
+        storeRGBData(date: Date(), location: String(format: "%.3f", locValue.latitude) + String(format: "%.3f", locValue.longitude), chemical: "\(mode)", concentration: lvl)
     }
     
     func newMode(newMode: modeState, color: UIColor) {
@@ -252,22 +251,28 @@ class CameraVC: UIViewController {
     }
     
     @IBAction func squareBtnWasPressed(_ sender: Any) {
-        shapeSelector.setImage(UIImage(named: "shapeSelector-square"), for: .normal)
-        circleLayer.isHidden = true
-        shapeLayer.isHidden = false
-        shapeViewWidth.constant = 0
-        flashBtnY.constant = 8
-        shapeStatus = "square"
+        shapeChange(shape: "square")
+        selectorState = 0
     }
     
     
     @IBAction func circleBtnWasPressed(_ sender: Any) {
-        shapeSelector.setImage(UIImage(named: "shapeSelector-circle"), for: .normal)
-        shapeLayer.isHidden = true
-        circleLayer.isHidden = false
+        shapeChange(shape: "circle")
+        selectorState = 0
+    }
+    
+    func shapeChange(shape: String) {
+        shapeSelector.setImage(UIImage(named: "shapeSelector-\(shape)"), for: .normal)
+        if shape == "circle" {
+            self.shapeLayer.isHidden = true
+            self.circleLayer.isHidden = false
+        } else {
+            self.shapeLayer.isHidden = false
+            self.circleLayer.isHidden = true
+        }
         shapeViewWidth.constant = 0
-        flashBtnY.constant = 8
-        shapeStatus = "circle"
+        flashBtnY.constant = 10
+        shapeStatus = shape
     }
     
     @IBAction func flashBtnWasPressed(_ sender: Any) {
@@ -344,8 +349,27 @@ class CameraVC: UIViewController {
         }
     }
     
-    func storeRGBData(date: Date, location: String, chemical: String, concentration: String) {
+    func storeRGBData(date: Date, location: String, chemical: String, concentration: Int) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let newData = NSEntityDescription.insertNewObject(forEntityName: "RGB_Data", into: context)
+        newData.setValue(date, forKey: "date")
+        newData.setValue(location, forKey: "location")
+        newData.setValue(chemical, forKey: "chemical")
+        newData.setValue(concentration, forKey: "concentration")
         
+        do {
+            try context.save()
+            print("SAVED")
+        } catch
+        {
+            print("ERROR")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
 
 }
@@ -359,7 +383,7 @@ extension CameraVC: AVCapturePhotoCaptureDelegate {
             
             let image = UIImage(data: photoData!)
             self.captureImageView.image = image
-            analyzeRGB2(box: sizingLbl)
+            analyzeRGB(box: sizingLbl)
             
             func cropImage(image: UIImage, toRect rect: CGRect) -> UIImage? {
                 var rect = rect
