@@ -22,6 +22,7 @@
 		B4298457213B5418003AC37C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4298455213B5418003AC37C /* LaunchScreen.storyboard */; };
 		B497A8C521ABC0D5008A5658 /* RGBValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B497A8C421ABC0D5008A5658 /* RGBValues.swift */; };
 		B49E642A218BFC620098FB64 /* CalibrationCurves.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E6429218BFC620098FB64 /* CalibrationCurves.swift */; };
+		B4E6A0AD21B7293D005E9569 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E6A0AC21B7293D005E9569 /* WeatherService.swift */; };
 		BCAEF8F89CF81FB28F4F1389 /* Pods_RGB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159A5CD31FB594E5B8473061 /* Pods_RGB.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		B4298458213B5418003AC37C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B497A8C421ABC0D5008A5658 /* RGBValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBValues.swift; sourceTree = "<group>"; };
 		B49E6429218BFC620098FB64 /* CalibrationCurves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationCurves.swift; sourceTree = "<group>"; };
+		B4E6A0AC21B7293D005E9569 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		E5782BB240D8C6C2EB5CC3F8 /* Pods-RGB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGB.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGB/Pods-RGB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +135,7 @@
 		B429844B213B5417003AC37C /* RGB */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6A0AB21B7292D005E9569 /* Services */,
 				B414C546215432E900FAEC34 /* Chemistry */,
 				B411CE84219BAC3900902E5E /* Model */,
 				B428E5C2213E0D710034F07D /* View */,
@@ -156,6 +159,14 @@
 				B41FF9BB219D347900CAF8AF /* DataVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B4E6A0AB21B7292D005E9569 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B4E6A0AC21B7293D005E9569 /* WeatherService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,11 +263,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RGB/Pods-RGB-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -282,6 +297,7 @@
 				B41FF9BE219D445800CAF8AF /* dataCell.swift in Sources */,
 				B429844F213B5417003AC37C /* CameraVC.swift in Sources */,
 				B429844D213B5417003AC37C /* AppDelegate.swift in Sources */,
+				B4E6A0AD21B7293D005E9569 /* WeatherService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

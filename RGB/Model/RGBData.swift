@@ -14,8 +14,10 @@ struct RGBData {
     private(set) public var location: String
     private(set) public var chemical: String
     private(set) public var concentration: Int
+    private(set) public var temperature: String
+    private(set) public var humidity: String
     
-    init(date: Date, location: String, chemical: String, concentration: Int) {
+    init(date: Date, location: String, chemical: String, concentration: Int, temperature: String, humidity: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm O"
         dateFormatter.locale = .current
@@ -24,6 +26,8 @@ struct RGBData {
         self.location = location
         self.chemical = chemical
         self.concentration = concentration
+        self.temperature = temperature
+        self.humidity = humidity
     }
     
 }

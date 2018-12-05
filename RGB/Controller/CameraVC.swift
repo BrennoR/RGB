@@ -124,6 +124,11 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+        
+        updateWeather()
+        
+        var weatherUpdateTimer =  Timer.scheduledTimer(timeInterval: 180.0, target: self, selector: #selector(updateWeather), userInfo: nil, repeats: true)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -222,7 +227,12 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         BH = (RGB.bh)
         IH = (RGB.ih)
         let locValue:CLLocationCoordinate2D = self.locationManager.location!.coordinate
-        storeRGBData(date: Date(), location: String(format: "%.3f", locValue.latitude) + String(format: "%.3f", locValue.longitude), chemical: "\(mode)", concentration: lvl)
+//        let urlString = "http://api.openweathermap.org/data/2.5/weather?lat=\(locValue.latitude)&lon=\(locValue.longitude)"
+//        WeatherService().getWeatherData(urlString: urlString)
+        let temperature = currentTemperature
+        let humidity = currentHumidity
+//        print(temperature)
+        storeRGBData(date: Date(), location: String(format: "%.3f", locValue.latitude) + String(format: "%.3f", locValue.longitude), chemical: "\(mode)", concentration: lvl, temperature: temperature, humidity: humidity)
     }
     
     func newMode(newMode: modeState, color: UIColor) {
@@ -349,7 +359,7 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func storeRGBData(date: Date, location: String, chemical: String, concentration: Int) {
+    func storeRGBData(date: Date, location: String, chemical: String, concentration: Int, temperature: String, humidity: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let newData = NSEntityDescription.insertNewObject(forEntityName: "RGB_Data", into: context)
@@ -357,7 +367,9 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         newData.setValue(location, forKey: "location")
         newData.setValue(chemical, forKey: "chemical")
         newData.setValue(concentration, forKey: "concentration")
-        
+        newData.setValue(temperature, forKey: "temperature")
+        newData.setValue(humidity, forKey: "humidity")
+
         do {
             try context.save()
             print("SAVED")
@@ -369,7 +381,17 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+//        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
+    // weather data timer
+    
+    @objc func updateWeather()
+    {
+        let locValue: CLLocationCoordinate2D = self.locationManager.location!.coordinate
+        let urlString = "http://api.openweathermap.org/data/2.5/weather?lat=\(locValue.latitude)&lon=\(locValue.longitude)"
+        WeatherService().getWeatherData(urlString: urlString)
+        print("WEATHER UPDATED")
     }
 
 }

@@ -7,5 +7,7 @@ target 'RGB' do
 
   # Pods for RGB
   pod 'Charts'
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
 
 end

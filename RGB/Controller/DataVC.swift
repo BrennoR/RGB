@@ -20,6 +20,8 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var locationArray: [String] = []
     var chemicalArray: [String] = []
     var concentrationArray: [Int] = []
+    var temperatureArray: [String] = []
+    var humidityArray: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,8 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     locationArray.insert(result.value(forKey: "location") as! String, at: 0)
                     chemicalArray.insert(result.value(forKey: "chemical") as! String, at: 0)
                     concentrationArray.insert(result.value(forKey: "concentration") as! Int, at: 0)
+                    temperatureArray.insert(result.value(forKey: "temperature") as! String, at: 0)
+                    humidityArray.insert(result.value(forKey: "humidity") as! String, at: 0)
                 }
             }
         } catch {
@@ -66,7 +70,9 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let location = locationArray[indexPath.row]
             let chemical = chemicalArray[indexPath.row]
             let concentration = concentrationArray[indexPath.row]
-            let data = RGBData(date: date, location: location, chemical: chemical, concentration: concentration)
+            let temperature = temperatureArray[indexPath.row]
+            let humidity = humidityArray[indexPath.row]
+            let data = RGBData(date: date, location: location, chemical: chemical, concentration: concentration, temperature: temperature, humidity: humidity)
             cell.updateData(data: data)
             return cell
         } else {
@@ -104,6 +110,8 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             locationArray.removeAll()
             chemicalArray.removeAll()
             concentrationArray.removeAll()
+            temperatureArray.removeAll()
+            humidityArray.removeAll()
             tableView.reloadData()
         } catch {
             print ("There was an error")
