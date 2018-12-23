@@ -40,6 +40,9 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
     var mode: modeState = .Phosphate
     
     var lvl = 0
+    
+    var latitude = "-"
+    var longitude = "-"
 
     // IB Outlets
     @IBOutlet weak var cameraView: UIView!
@@ -127,7 +130,7 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         
         updateWeather()
         
-        var weatherUpdateTimer =  Timer.scheduledTimer(timeInterval: 180.0, target: self, selector: #selector(updateWeather), userInfo: nil, repeats: true)
+        _ =  Timer.scheduledTimer(timeInterval: 120.0, target: self, selector: #selector(updateWeather), userInfo: nil, repeats: true)
         
     }
     
@@ -226,13 +229,18 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         GH = (RGB.gh)
         BH = (RGB.bh)
         IH = (RGB.ih)
-        let locValue:CLLocationCoordinate2D = self.locationManager.location!.coordinate
-//        let urlString = "http://api.openweathermap.org/data/2.5/weather?lat=\(locValue.latitude)&lon=\(locValue.longitude)"
-//        WeatherService().getWeatherData(urlString: urlString)
+        
+        if let locValue: CLLocationCoordinate2D = self.locationManager.location?.coordinate {
+            latitude = String(format: "%.3f", locValue.latitude)
+            longitude = String(format: "%.3f", locValue.longitude)
+        } else {
+            latitude = "-"
+            longitude = "-"
+        }
+        
         let temperature = currentTemperature
         let humidity = currentHumidity
-//        print(temperature)
-        storeRGBData(date: Date(), location: String(format: "%.3f", locValue.latitude) + String(format: "%.3f", locValue.longitude), chemical: "\(mode)", concentration: lvl, temperature: temperature, humidity: humidity)
+        storeRGBData(date: Date(), location: latitude + ", " + longitude, chemical: "\(mode)", concentration: lvl, temperature: temperature, humidity: humidity)
     }
     
     func newMode(newMode: modeState, color: UIColor) {
@@ -379,19 +387,20 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
 //        print("locations = \(locValue.latitude) \(locValue.longitude)")
-    }
+//    }
     
-    // weather data timer
+    // Weather data timer
     
     @objc func updateWeather()
     {
-        let locValue: CLLocationCoordinate2D = self.locationManager.location!.coordinate
-        let urlString = "http://api.openweathermap.org/data/2.5/weather?lat=\(locValue.latitude)&lon=\(locValue.longitude)"
-        WeatherService().getWeatherData(urlString: urlString)
-        print("WEATHER UPDATED")
+        if let locValue: CLLocationCoordinate2D = self.locationManager.location?.coordinate {
+            let urlString = "http://api.openweathermap.org/data/2.5/weather?lat=\(locValue.latitude)&lon=\(locValue.longitude)"
+            WeatherService().getWeatherData(urlString: urlString)
+//            print("WEATHER UPDATED")
+        }
     }
 
 }

@@ -14,7 +14,7 @@ class dataCell: UITableViewCell {
     
     func updateData(data: RGBData) {
         
-        let text = "\(data.date)\nLocation: \(data.location)\n\(data.chemical) - \(data.concentration) ppm\nTemp: \(data.temperature) °C   Humidity: \(String(describing: data.humidity)) %"
+        let text = "\(data.date)\nLocation: \(data.location)\n\(data.chemical): \(data.concentration) ppm\nTemp: \(data.temperature) °C   Humidity: \(String(describing: data.humidity)) %"
         
         dataLbl.text = text
         
