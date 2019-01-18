@@ -35,8 +35,8 @@ class AdvancedVC: UIViewController {
         super.viewDidLoad()
 
         backHistBtn.isHidden = true
-        // Do any additional setup after loading the view.
         initChartData(red: RH, green: GH, blue: BH)
+        initializeStats(hist: RH + GH + BH)
     }
     
     func initChartData(red: [Float], green: [Float], blue: [Float]) {
@@ -88,7 +88,7 @@ class AdvancedVC: UIViewController {
         let max = hist.max()
         let count = hist.count
         let avg = hist.reduce(0, +) / Float(count)
-        let variance = hist.reduce(0, { $0 + ($1-avg)*($1-avg) })
+        let variance = hist.map{pow(Double($0) - Double(avg), 2)}.reduce(0, +) / Double(count)
         let stdev = sqrt(variance)
         let median = hist.sorted(by: <)[count / 2]
         statsLblLeft.text = NSString(format: """
@@ -143,6 +143,7 @@ class AdvancedVC: UIViewController {
             backHistBtn.isHidden = true
         case .Red:
             initChartData(red: RH, green: GH, blue: BH)
+            initializeStats(hist: RH + GH + BH)
             histModeState = .RGB
             backHistBtn.isHidden = true
         case .Green:
