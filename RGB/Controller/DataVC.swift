@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import FirebaseDatabase
 
 class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -50,6 +51,7 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } catch {
             // process error
         }
+        
     }
     
     @IBAction func backBtnWasPressed(_ sender: Any) {
@@ -80,6 +82,17 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    // Upload data to Firebase
+    
+    func uploadData() {
+        let ref = Database.database().reference()
+        
+        for index in dateArray.indices {
+            ref.childByAutoId().setValue(["time": "\(dateArray[index])", "location": locationArray[index], "chemical": chemicalArray[index], "concentration": concentrationArray[index], "temperature": temperatureArray[index], "humidity": humidityArray[index]])
+        }
+        
+    }
+    
     @IBAction func clearDataBtnWasPressed(_ sender: Any) {
         let alertController = UIAlertController(title: "Are you sure you want to clear all data?", message: "", preferredStyle: .alert)
         
@@ -95,6 +108,17 @@ class DataVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func uploadDataBtnWasPressed(_ sender: Any) {
+        let alertController = UIAlertController(title: "Uploading the data will clear your current log. Are you sure you want to proceed?", message: "", preferredStyle: .alert)
+        let uploadAction = UIAlertAction(title: "Upload", style: .destructive, handler: { (action) in
+            self.uploadData()
+            self.clearData()
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(uploadAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
     
     func clearData() {

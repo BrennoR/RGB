@@ -9,5 +9,7 @@ target 'RGB' do
   pod 'Charts'
   pod 'Alamofire'
   pod 'SwiftyJSON'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
 
 end

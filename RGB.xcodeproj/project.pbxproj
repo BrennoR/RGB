@@ -22,6 +22,7 @@
 		B4298457213B5418003AC37C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4298455213B5418003AC37C /* LaunchScreen.storyboard */; };
 		B497A8C521ABC0D5008A5658 /* RGBValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B497A8C421ABC0D5008A5658 /* RGBValues.swift */; };
 		B49E642A218BFC620098FB64 /* CalibrationCurves.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E6429218BFC620098FB64 /* CalibrationCurves.swift */; };
+		B4A7C9E221F6869C00BA2A58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4A7C9E121F6844300BA2A58 /* GoogleService-Info.plist */; };
 		B4E6A0AD21B7293D005E9569 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E6A0AC21B7293D005E9569 /* WeatherService.swift */; };
 		BCAEF8F89CF81FB28F4F1389 /* Pods_RGB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159A5CD31FB594E5B8473061 /* Pods_RGB.framework */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		B4298458213B5418003AC37C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B497A8C421ABC0D5008A5658 /* RGBValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBValues.swift; sourceTree = "<group>"; };
 		B49E6429218BFC620098FB64 /* CalibrationCurves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationCurves.swift; sourceTree = "<group>"; };
+		B4A7C9E121F6844300BA2A58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B4E6A0AC21B7293D005E9569 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		E5782BB240D8C6C2EB5CC3F8 /* Pods-RGB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGB.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGB/Pods-RGB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +149,7 @@
 				B4298453213B5418003AC37C /* Assets.xcassets */,
 				B4298455213B5418003AC37C /* LaunchScreen.storyboard */,
 				B4298458213B5418003AC37C /* Info.plist */,
+				B4A7C9E121F6844300BA2A58 /* GoogleService-Info.plist */,
 			);
 			path = RGB;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4298457213B5418003AC37C /* LaunchScreen.storyboard in Resources */,
+				B4A7C9E221F6869C00BA2A58 /* GoogleService-Info.plist in Resources */,
 				B4298454213B5418003AC37C /* Assets.xcassets in Resources */,
 				B4298452213B5417003AC37C /* Main.storyboard in Resources */,
 			);
@@ -265,13 +269,19 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-RGB/Pods-RGB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
