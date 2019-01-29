@@ -143,12 +143,37 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         let zoom = UIPinchGestureRecognizer(target:self, action: #selector(pinch))
         
         captureSession = AVCaptureSession()
+//        captureSession.sessionPreset = .photo
+        
         let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
         
         if (backCamera?.isFocusModeSupported(.continuousAutoFocus))! {
             try! backCamera!.lockForConfiguration()
             backCamera!.focusMode = .continuousAutoFocus
             print("Focusing")
+            backCamera!.unlockForConfiguration()
+        }
+        
+        // White Balance
+        if (backCamera?.isWhiteBalanceModeSupported(.locked))! {
+            try! backCamera!.lockForConfiguration()
+            backCamera?.setWhiteBalanceModeLocked(with: AVCaptureDevice.WhiteBalanceGains.init(redGain: 2.0, greenGain: 1.0, blueGain: 2.0), completionHandler: nil)
+//            backCamera!.whiteBalanceMode = .locked
+            print(backCamera!.deviceWhiteBalanceGains)
+            print("White")
+            print(backCamera!.whiteBalanceMode.rawValue)
+            backCamera!.unlockForConfiguration()
+        }
+        
+        // Exposure
+        if (backCamera?.isExposureModeSupported(.custom))! {
+            try! backCamera!.lockForConfiguration()
+            print(backCamera!.activeFormat.minISO)
+            print(backCamera!.activeFormat.maxISO)
+            backCamera?.setExposureModeCustom(duration: (backCamera?.exposureDuration)!, iso: 80, completionHandler: nil)
+            print("Exposure")
+            print(backCamera!.exposureMode)
+            print(backCamera!.exposureDuration)
             backCamera!.unlockForConfiguration()
         }
         
@@ -178,8 +203,16 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
     }
     
     @objc func didTapCameraView() {
-        
         let settings = AVCapturePhotoSettings()
+        
+        // RAW settings
+//        print(self.cameraOutput.availableRawPhotoPixelFormatTypes)
+//        guard let availableRawFormat = self.cameraOutput.availableRawPhotoPixelFormatTypes.first else { return }
+//        let settings = AVCapturePhotoSettings(rawPixelFormatType: availableRawFormat,
+//                                                   processedFormat: [AVVideoCodecKey : AVVideoCodecType.hevc])
+//
+//        settings.isAutoStillImageStabilizationEnabled = false
+        
         let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
         let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType, kCVPixelBufferWidthKey as String: 160, kCVPixelBufferHeightKey as String: 160]
         
