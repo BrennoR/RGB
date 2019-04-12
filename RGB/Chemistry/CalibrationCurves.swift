@@ -8,8 +8,8 @@
 
 import Foundation
 
-func phosphateLvl(blue: Float) -> Int {
-    let plvl = Int((0.012 * blue * blue) - (5.6 * blue) + 660)
+func phosphateLvl(red: Float) -> Int {
+    let plvl = Int((0.02317 * red * red) - (1.237 * red) + 15.07)
     return plvl
 }
 

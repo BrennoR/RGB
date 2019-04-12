@@ -81,9 +81,6 @@ extension UIImage {
         let pos = box.frame.origin
         let width = box.frame.size.width
         let height = box.frame.size.height
-        print(pos)
-        print(width)
-        print(height)
         
         var RH: [Float] = []
         var BH: [Float] = []
@@ -106,18 +103,13 @@ extension UIImage {
                 R += Float(r)
                 G += Float(g)
                 B += Float(b)
-                //                print(counter)
             }
         }
         
         let avgR = R / counter
-        //        print(avgR)
         let avgG = G / counter
-        //        print(avgG)
         let avgB = B / counter
-        //        print(avgB)
-        
-//        return (avgR, avgG, avgB, RH, GH, BH, IH)
+    
         return RGBValues(red: avgR, green: avgG, blue: avgB, rh: RH, gh: GH, bh: BH, ih: IH)
     }
     

@@ -84,8 +84,8 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         print(trueWidthCenter)
         let trueHeightCenter = ceil(cameraView.frame.origin.y + height / 2)
         print(trueHeightCenter)
-        let boxWidth = CGFloat(140)
-        let boxHeight = CGFloat(140)
+        let boxWidth = CGFloat(90)
+        let boxHeight = CGFloat(90)
         let heightPos = height / 2 - boxHeight / 2
         shapeViewWidth.constant = 0
         modeViewHeight.constant = 0
@@ -99,6 +99,7 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         shapeLayer.fillColor = nil
         shapeLayer.strokeColor = UIColor.red.cgColor
         shapeLayer.path = UIBezierPath(rect: shapeLayer.bounds).cgPath
+        shapeLayer.name = "Square shape"
         shapeLayer.position = CGPoint(x: trueWidthCenter, y: trueHeightCenter)
         self.view.layer.addSublayer(shapeLayer)
         sizingLbl.frame.origin.x = shapeLayer.frame.origin.x
@@ -132,6 +133,8 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         
         _ =  Timer.scheduledTimer(timeInterval: 120.0, target: self, selector: #selector(updateWeather), userInfo: nil, repeats: true)
         
+        addCalibrationGestureRecognizer()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,39 +146,10 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         let zoom = UIPinchGestureRecognizer(target:self, action: #selector(pinch))
         
         captureSession = AVCaptureSession()
-//        captureSession.sessionPreset = .photo
+        
+        exposureCalibration()
         
         let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
-        
-        if (backCamera?.isFocusModeSupported(.continuousAutoFocus))! {
-            try! backCamera!.lockForConfiguration()
-            backCamera!.focusMode = .continuousAutoFocus
-            print("Focusing")
-            backCamera!.unlockForConfiguration()
-        }
-        
-        // White Balance
-        if (backCamera?.isWhiteBalanceModeSupported(.locked))! {
-            try! backCamera!.lockForConfiguration()
-            backCamera?.setWhiteBalanceModeLocked(with: AVCaptureDevice.WhiteBalanceGains.init(redGain: 2.0, greenGain: 1.0, blueGain: 2.0), completionHandler: nil)
-//            backCamera!.whiteBalanceMode = .locked
-            print(backCamera!.deviceWhiteBalanceGains)
-            print("White")
-            print(backCamera!.whiteBalanceMode.rawValue)
-            backCamera!.unlockForConfiguration()
-        }
-        
-        // Exposure
-        if (backCamera?.isExposureModeSupported(.custom))! {
-            try! backCamera!.lockForConfiguration()
-            print(backCamera!.activeFormat.minISO)
-            print(backCamera!.activeFormat.maxISO)
-            backCamera?.setExposureModeCustom(duration: (backCamera?.exposureDuration)!, iso: 80, completionHandler: nil)
-            print("Exposure")
-            print(backCamera!.exposureMode)
-            print(backCamera!.exposureDuration)
-            backCamera!.unlockForConfiguration()
-        }
         
         do {
             let input = try AVCaptureDeviceInput(device: backCamera!)
@@ -187,6 +161,7 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
             
             if captureSession.canAddOutput(cameraOutput) == true {
                 captureSession.addOutput(cameraOutput!)
+                captureSession.commitConfiguration()
                 
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
                 previewLayer.videoGravity = AVLayerVideoGravity.resizeAspect
@@ -204,14 +179,6 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
     
     @objc func didTapCameraView() {
         let settings = AVCapturePhotoSettings()
-        
-        // RAW settings
-//        print(self.cameraOutput.availableRawPhotoPixelFormatTypes)
-//        guard let availableRawFormat = self.cameraOutput.availableRawPhotoPixelFormatTypes.first else { return }
-//        let settings = AVCapturePhotoSettings(rawPixelFormatType: availableRawFormat,
-//                                                   processedFormat: [AVVideoCodecKey : AVVideoCodecType.hevc])
-//
-//        settings.isAutoStillImageStabilizationEnabled = false
         
         let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
         let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType, kCVPixelBufferWidthKey as String: 160, kCVPixelBufferHeightKey as String: 160]
@@ -251,7 +218,7 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
     func RGBValuesSetup(RGB: RGBValues) {
         switch mode {
         case .Phosphate:
-            lvl = phosphateLvl(blue: RGB.blue)
+            lvl = phosphateLvl(red: RGB.red)
         case .Nitrate:
             lvl = nitrateLvl(red: RGB.red)
         case .pH:
@@ -420,20 +387,61 @@ class CameraVC: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-//        print("locations = \(locValue.latitude) \(locValue.longitude)")
-//    }
-    
     // Weather data timer
-    
     @objc func updateWeather()
     {
         if let locValue: CLLocationCoordinate2D = self.locationManager.location?.coordinate {
             let urlString = "http://api.openweathermap.org/data/2.5/weather?lat=\(locValue.latitude)&lon=\(locValue.longitude)"
             WeatherService().getWeatherData(urlString: urlString)
-//            print("WEATHER UPDATED")
         }
+    }
+    
+    // Calibration gesture recognizer
+    func addCalibrationGestureRecognizer() {
+        let hold = UILongPressGestureRecognizer(target: self, action: #selector(exposureCalibration))
+        hold.minimumPressDuration = 1.5
+        self.view.addGestureRecognizer(hold)
+    }
+    
+    // Draw green calibration
+    func drawGreenCalibration() {
+        shapeLayer.strokeColor = UIColor.green.cgColor
+        circleLayer.strokeColor = UIColor.green.cgColor
+        self.view.layer.replaceSublayer(shapeLayer, with: shapeLayer)
+        self.view.layer.replaceSublayer(circleLayer, with: circleLayer)
+        print("HELD")
+    }
+    
+    // Exposure calibration
+    @objc func exposureCalibration() {
+        let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
+        
+        try! backCamera!.lockForConfiguration()
+        if (backCamera?.isFocusModeSupported(.continuousAutoFocus))! {
+            backCamera!.focusMode = .continuousAutoFocus
+            print("Focusing")
+        }
+        
+        // White Balance
+        if (backCamera?.isWhiteBalanceModeSupported(.locked))! {
+            backCamera?.setWhiteBalanceModeLocked(with: AVCaptureDevice.WhiteBalanceGains.init(redGain: 2.0, greenGain: 1.0, blueGain: 2.0), completionHandler: nil)
+            print(backCamera!.deviceWhiteBalanceGains)
+            print("White")
+            print(backCamera!.whiteBalanceMode.rawValue)
+        }
+        
+        // Exposure
+        if (backCamera?.isExposureModeSupported(.custom))! {
+            print(backCamera!.activeFormat.minISO)
+            print(backCamera!.activeFormat.maxISO)
+            backCamera?.setExposureModeCustom(duration: CMTime(value: 1, timescale: 180), iso: backCamera!.activeFormat.minISO, completionHandler: nil)
+            print("Exposure")
+            print(backCamera!.exposureMode)
+            print(backCamera!.exposureDuration)
+        }
+        backCamera!.unlockForConfiguration()
+        
+        drawGreenCalibration()
     }
 
 }
@@ -448,6 +456,9 @@ extension CameraVC: AVCapturePhotoCaptureDelegate {
             let image = UIImage(data: photoData!)
             self.captureImageView.image = image
             analyzeRGB(box: sizingLbl)
+            
+            let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
+            print(backCamera?.exposureDuration)
             
             func cropImage(image: UIImage, toRect rect: CGRect) -> UIImage? {
                 var rect = rect
@@ -471,7 +482,6 @@ extension CameraVC: AVCapturePhotoCaptureDelegate {
             }
             
             func cropBottomImage(image: UIImage) -> UIImage {
-//                let rect = CGRect(x: 750, y: 350, width: 400, height: 400)
                 print(self.view.frame.width)
                 print(self.view.frame.height)
                 let rect = CGRect(x: self.view.frame.height + 70, y: self.view.frame.width - 70, width: 420, height: 420)
@@ -480,6 +490,11 @@ extension CameraVC: AVCapturePhotoCaptureDelegate {
             
             let newImg = cropBottomImage(image: image!)
             self.previewImageView.image = newImg
+            
+            shapeLayer.strokeColor = UIColor.red.cgColor
+            circleLayer.strokeColor = UIColor.red.cgColor
+            self.view.layer.replaceSublayer(shapeLayer, with: shapeLayer)
+            self.view.layer.replaceSublayer(circleLayer, with: circleLayer)
         }
     }
 }
